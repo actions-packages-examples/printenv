@@ -24,25 +24,7 @@ jobs:
       run: |
         printenv
 
-    - name: Assert GITHUB_RUN_ID exists (*nix)
-      if: runner.os == 'macOS' || runner.os == 'Linux'
-      run: |
-        if [ -z "${GITHUB_RUN_ID}" ]; then
-          exit 0
-        else
-          exit 1
-        fi
-
     # https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-powershell-1.0/ff730964(v=technet.10)
     - if: runner.os == 'Windows'
       run: |
         Get-ChildItem Env:
-
-    - name: Assert GITHUB_RUN_ID exists (Windows)
-      if: runner.os == 'Windows'
-      run: |
-        if (Get-Variable 'GITHUB_RUN_ID' -Scope 'Global') {
-          exit 0
-        } else {
-          exit 1
-        } 
