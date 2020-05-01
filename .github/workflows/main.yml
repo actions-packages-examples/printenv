@@ -14,6 +14,7 @@ jobs:
       matrix:
         os: [windows-latest, ubuntu-latest, ubuntu-16.04, macos-latest]
         times-to-run: [1, 2, 3, 4, 5]
+      fail-fast: false
     
     steps:
 
@@ -26,8 +27,7 @@ jobs:
     - name: Assert GITHUB_RUN_ID exists (*nix)
       if: runner.os == 'macOS' || runner.os == 'Linux'
       run: |
-        
-        if [[ -z "${GITHUB_RUN_ID}" ]]; then
+        if [ -z "${GITHUB_RUN_ID}" ]; then
           exit 0
         else
           exit 1
