@@ -13,6 +13,7 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest, ubuntu-16.04, macos-latest]
+        times-to-run: [1, 2, 3, 4, 5]
     
     steps:
 
