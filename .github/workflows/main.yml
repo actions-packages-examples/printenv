@@ -24,7 +24,8 @@ jobs:
       run: |
         printenv
         
-        if [ "$GITHUB_RUN_ID" != ""];
+        run_id=$GITHUB_RUN_ID
+        if [ "$run_id" != ""];
           exit 0
         else
           echo "GITHUB_RUN_ID is not defined."
