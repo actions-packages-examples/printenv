@@ -19,11 +19,12 @@ jobs:
 
     # https://opensource.apple.com/source/apache/apache-643/printenv.auto.html
     # https://manpages.ubuntu.com/manpages/bionic/man1/printenv.1.html
-    - if: runner.os == 'macOS' || runner.os == 'Linux'
+    - shell: bash
       run: |
         printenv
 
-    # https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-powershell-1.0/ff730964(v=technet.10)
-    - if: runner.os == 'Windows'
-      run: |
-        Get-ChildItem Env:
+        if [[ -z "${GITHUB_RUN_ID}" ]]; then
+          exit 0
+        else
+          exit 1
+        fi
