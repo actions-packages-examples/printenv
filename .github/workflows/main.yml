@@ -23,6 +23,13 @@ jobs:
     - if: runner.os == 'macOS' || runner.os == 'Linux'
       run: |
         printenv
+        
+        if [ "$GITHUB_RUN_ID" != ""];
+          exit 0
+        else
+          echo "GITHUB_RUN_ID is not defined."
+          exit 1
+        fi
 
     # https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-powershell-1.0/ff730964(v=technet.10)
     - if: runner.os == 'Windows'
