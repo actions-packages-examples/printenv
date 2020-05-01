@@ -1,0 +1,28 @@
+name: Main
+
+# Quick way to trigger a workflow by starring this repo.
+on: watch
+
+jobs:
+  build:
+    # This only runs when `francisfuzz` stars the repo.
+    if: github.actor == 'francisfuzz'
+
+    # Runs this job once for every listed runner in `matrix.os`.
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest, ubuntu-16.04, macos-latest]
+    
+    steps:
+
+    # https://opensource.apple.com/source/apache/apache-643/printenv.auto.html
+    # https://manpages.ubuntu.com/manpages/bionic/man1/printenv.1.html
+    - if: runner.os == 'macOS' || runner.os == 'Linux'
+      run: |
+        printenv
+
+    # https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-powershell-1.0/ff730964(v=technet.10)
+    - if: runner.os == 'Windows'
+      run: |
+        Get-ChildItem Env:
